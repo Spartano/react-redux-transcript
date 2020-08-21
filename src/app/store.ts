@@ -1,10 +1,12 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import transcribeReducer from "../features/transcribe/transcribeSlice";
+import { refHandler } from "./refMiddleware";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    transcribe: transcribeReducer,
   },
+  middleware: [refHandler],
 });
 
 export type RootState = ReturnType<typeof store.getState>;
