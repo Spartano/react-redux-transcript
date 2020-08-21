@@ -1,8 +1,8 @@
 import { makeStyles, Theme } from "@material-ui/core";
 import React from "react";
 import AudioPlayer from "./AudioPlayer";
-import Watch from "./Watch";
 import AudioDuration from "./AudioDuration";
+import Transcript from "./Transcript";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -17,7 +17,7 @@ export function Transcribe() {
     <div className={classes.root}>
       <AudioPlayer />
       <AudioDuration />
-      <div>Transcript</div>
+      <Transcript />
     </div>
   );
 }

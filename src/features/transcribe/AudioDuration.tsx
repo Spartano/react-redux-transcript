@@ -1,23 +1,24 @@
+import { Box, Typography } from "@material-ui/core";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { myRefStore } from "app/refMiddleware";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectAudioCurrentTime, selectAudioDuration, selectAudioPlaying } from "./transcribeSlice";
 import { convertTime } from "util/timeHelpers";
-import { Typography, Box } from "@material-ui/core";
+import { selectAudioCurrentTime, selectAudioDuration, selectAudioPlaying } from "./transcribeSlice";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: "flex",
     height: 64,
     alignItems: "center",
-    paddingLeft: 32,
+    marginLeft: 16,
   },
   container: {
     display: "flex",
     borderRadius: 3,
     backgroundColor: "#eff3f6",
     padding: 4,
+    paddingLeft: 16,
   },
 }));
 

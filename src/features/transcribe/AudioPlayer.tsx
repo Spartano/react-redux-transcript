@@ -8,8 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import PlayIcons from "./audioPlayer/PlayIcons";
 import VolumeIcons from "./audioPlayer/VolumeIcons";
 import VolumeSpeedMenu from "./audioPlayer/VolumeSpeedMenu";
-
 import {
+  pauseAudioPlaying,
+  selectAudioDuration,
   selectAudioPlaybackRate,
   selectAudioPlaying,
   selectAudioVolume,
@@ -36,6 +37,7 @@ export default function AudioPlayer() {
   const isPlaying = useSelector(selectAudioPlaying);
 
   const volume = useSelector(selectAudioVolume);
+  const duration = useSelector(selectAudioDuration);
   const playbackRate = useSelector(selectAudioPlaybackRate);
 
   const dispatch = useDispatch();
@@ -82,7 +84,7 @@ export default function AudioPlayer() {
   const handleTimeForward = (e) => {
     if (!audioRef.current) return;
     audioRef.current.currentTime += 10;
-    //action used for re-rendering time watchers
+    //action used for re-rendering time watchers if audio is paused
     dispatch(setAudioCurrentTime(audioRef.current.currentTime));
   };
 
@@ -90,8 +92,15 @@ export default function AudioPlayer() {
     if (!audioRef.current) return;
 
     audioRef.current.currentTime -= 10;
-    //action used for re-rendering time watchers
+    //action used for re-rendering time watchers if audio is paused
     dispatch(setAudioCurrentTime(audioRef.current.currentTime));
+  };
+
+  const handlePause = (e) => {
+    //pause time if reached end
+    if (e.target.currentTime === duration) {
+      dispatch(pauseAudioPlaying());
+    }
   };
 
   return (
@@ -119,7 +128,7 @@ export default function AudioPlayer() {
         </Toolbar>
       </AppBar>
 
-      <Audio track={track} ref={audioRef} onLoadedMetadata={handleDuration} />
+      <Audio track={track} ref={audioRef} onLoadedMetadata={handleDuration} onPause={handlePause} />
     </div>
   );
 }

@@ -47,6 +47,7 @@ export const transcribeSlice = createSlice({
     skipAudioBackward10(state, action: PayloadAction<number>) {
       state.audioCurrentTime = action.payload;
     },
+    //action used for re-rendering time watchers if audio is paused
     setAudioCurrentTime(state, action: PayloadAction<number>) {
       if (action.payload === state.audioDuration) {
         state.audioIsPlaying = false;
